@@ -5,7 +5,7 @@ var _ = require('lodash');
 
 function instrument(options) {
   var excludePattern = options.exclude ? [].concat(options.exclude) : [''];
-  var instrumenter = new Istanbul.Instrumenter();
+  var instrumenter = new Istanbul.Instrumenter(options);
 
   function transform(file) {
     // If if doesnt match the pattern dont instrument it
@@ -41,7 +41,7 @@ function instrument(options) {
 var report = [];
 
 function writeReports(options) {
-  var collector = new Istanbul.Collector();
+  var collector = new Istanbul.Collector(options);
 
   if (options.report) {
     report = options.report;
